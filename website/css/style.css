@@ -11,7 +11,7 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 html {
   color: #ffff00;
@@ -261,28 +261,29 @@ textarea {
   display: flex;
   flex-direction: row;
   border: 2px none #ffff00;
-  border-bottom-style:solid;
+  border-bottom-style: solid;
 
   .title {
     background: #ffff00;
     color: #000000;
     padding-right: 2em;
     padding-left: 0.5em;
-margin: 0;
-font-family: "JetBrains Mono", monospace;
+    margin: 0;
+    font-family: "JetBrains Mono", monospace;
   }
 
-    &:after {
-      content: "";
-      position: relative;
-      display: inline-block;
-      background: #000000;
-      top: -41px;
-right: 38px;
-      width: 75px;
-      height: 75px;
+  &:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    background: #000000;
+    top: -41px;
+    right: 38px;
+    width: 75px;
+    height: 75px;
 
-transform: rotate(45deg)  ;   }
+    transform: rotate(45deg);
+  }
 }
 
 .container {
