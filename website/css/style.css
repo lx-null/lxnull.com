@@ -18,6 +18,7 @@ html {
   background: #000000;
   font-size: 1em;
   line-height: 1.4;
+  font-family: "JetBrains Mono", monospace;
 }
 
 body {
@@ -260,16 +261,31 @@ textarea {
 
   display: flex;
   flex-direction: row;
-  border: 2px none #ffff00;
+  border: 3px none #ffff00;
   border-bottom-style: solid;
 
-  .title {
-    background: #ffff00;
+  a {
+    text-decoration: none;
     color: #000000;
-    padding-right: 2em;
-    padding-left: 0.5em;
-    margin: 0;
-    font-family: "JetBrains Mono", monospace;
+    background: #ffff00;
+
+    &:hover {
+      color: #ffff00;
+      background: #000000;
+    }
+
+    &:focus {
+      color: #ffff00;
+      background: #000000;
+
+      outline: none;
+    }
+
+    .title {
+      padding-right: 2em;
+      padding-left: 0.5em;
+      margin: 0;
+    }
   }
 
   &:after {
@@ -286,14 +302,85 @@ textarea {
   }
 }
 
+.nav {
+  display: none;
+  width: 90vw;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 2.5em;
+  border: 3px none #ffff00;
+  border-right-style: solid;
+  border-left-style: solid;
+  box-sizing: border-box;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 0;
+    margin: 0;
+
+    a {
+      color: #ffff00;
+      text-decoration: none;
+
+      &:hover {
+        color: #000000;
+        background: #ffff00;
+      }
+
+      &:focus {
+        outline: none;
+        color: #000000;
+        background: #ffff00;
+      }
+      li {
+        list-style-type: none;
+      }
+    }
+    a + a {
+      margin-left: 8px;
+    }
+  }
+}
+
 .container {
   width: 90vw;
   max-width: 700px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 0 2.5em;
-  border: 2px none #ffff00;
+  border: 3px none #ffff00;
   border-right-style: solid;
   border-left-style: solid;
   box-sizing: border-box;
+}
+
+.container {
+  width: 90vw;
+  max-width: 700px;
+  min-height: 50vh;
+  margin: 0 auto 30px;
+  padding: 0 2.5em;
+  border: 3px none #ffff00;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .nav {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+}
+
+@media (min-width: 1200px) {
 }
