@@ -11,7 +11,7 @@ html {
 .header {
   width: 90vw;
   max-width: 700px;
-  max-height:39px;
+  max-height: 39px;
   margin: 20px auto 0;
 
   display: flex;
@@ -90,11 +90,13 @@ html {
         color: #000000;
         background: #ffff00;
       }
+
       li {
         list-style-type: none;
       }
     }
-    a + a {
+
+    a+a {
       margin-left: 8px;
     }
   }
