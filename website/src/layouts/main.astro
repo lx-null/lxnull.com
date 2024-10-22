@@ -1,10 +1,17 @@
-<!doctype html>
-<html class="no-js" lang="">
+---
+import Header from '../components/header.astro'
+import Footer from '../components/footer.astro'
+import '../style.css';
+
+const {title = "lxnull"} = Astro.props;
+---
+
+<html class="no-js bg-black" lang="" >
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>lxnull</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <meta name="description" content="" />
 
     <meta property="og:title" content="" />
@@ -32,17 +39,10 @@
   </head>
 
   <body>
-    <!-- Add your site or application content here -->
-    <script src="js/app.js"></script>
-    <div class="header">
-      <a href="/"><h1 class="title">WIP</h1></a>
+    <Header title={title} />
+    <div class="container">
+    <slot />
     </div>
-    <nav class="nav">
-      <ul>
-        <a href="/blog"><li>Blog</li></a>
-        <a href="/tools"><li>Tools</li></a>
-      </ul>
-    </nav>
-    <div class="container"></div>
+    <Footer />
   </body>
 </html>
