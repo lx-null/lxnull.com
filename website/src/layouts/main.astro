@@ -1,8 +1,12 @@
 ---
 import Header from '../components/header.astro'
+import Footer from '../components/footer.astro'
+import '../style.css';
+
+const {title = "lxnull"} = Astro.props;
 ---
 
-<html class="no-js" lang="">
+<html class="no-js bg-black" lang="" >
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,7 +39,10 @@ import Header from '../components/header.astro'
   </head>
 
   <body>
-    <Header />
+    <Header title={title} />
+    <div class="container">
     <slot />
+    </div>
+    <Footer />
   </body>
 </html>
