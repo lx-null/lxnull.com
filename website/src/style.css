@@ -62,7 +62,6 @@ html {
   width: 90vw;
   max-width: 700px;
   margin: 0 auto;
-  padding: 0 2.5em;
   border: 3px none #ffff00;
   border-right-style: solid;
   border-left-style: solid;
@@ -107,7 +106,6 @@ html {
   max-width: 700px;
   min-height: 50vh;
   margin: 0 auto;
-  padding: 0 2.5em;
   border: 3px none #ffff00;
   border-right-style: solid;
   border-left-style: solid;
@@ -119,7 +117,6 @@ html {
   max-width: 700px;
   min-height: 40px;
   margin: 0 auto 30px;
-  padding: 0 2.5em;
   border: 3px none #ffff00;
   border-right-style: solid;
   border-left-style: solid;

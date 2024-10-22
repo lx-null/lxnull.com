@@ -1,5 +1,29 @@
 ---
 import Main from "../../layouts/main.astro";
+import { getCollection } from "astro:content";
+
+const postEntries = await getCollection("blog");
+const posts = postEntries.filter((entry) => {
+  return entry.data?.publishDate != undefined;
+});
 ---
 
-<Main title="blog" />
+<Main title="blog">
+  <ul>
+    {
+      posts.map((entry) => {
+        return (
+          <li class="text-sm ">
+            <a
+              href={`/blog/${entry.slug}`}
+              class="focus:outline-none focus:bg-[#ffff00] focus:text-[#000000] hover:bg-[#ffff00] hover:text-[#000000]"
+            >
+              {" "}
+              {`${entry.data.title} - ${new Date(String(entry.data.publishDate)).toLocaleDateString("en-GB")}`}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Main>

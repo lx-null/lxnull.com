@@ -1,13 +1,18 @@
 ---
 import { getCollection } from "astro:content";
 import Main from "../../layouts/main.astro";
+import Prose from "../../components/prose.astro";
 
 export async function getStaticPaths() {
   const postEntries = await getCollection("blog");
-  return postEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  return postEntries
+    .filter((entry) => {
+      return entry.data?.publishDate != undefined;
+    })
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;
@@ -15,6 +20,7 @@ const { Content } = await entry.render();
 ---
 
 <Main title="lxnull">
-  <Content />
-  <hr />
+  <Prose>
+    <Content />
+  </Prose>
 </Main>
