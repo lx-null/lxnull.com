@@ -1,26 +1,40 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import Main from "../../layouts/main.astro";
 import Prose from "../../components/prose.astro";
 
 export async function getStaticPaths() {
   const postEntries = await getCollection("blog");
-  return postEntries
-    .filter((entry) => {
-      return entry.data?.publishDate != undefined;
-    })
-    .map((entry) => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    }));
+  return await Promise.all(
+    postEntries
+      .filter((entry) => {
+        return entry.data?.publishDate != undefined;
+      })
+      .map(async (entry) => {
+        return {
+          params: { slug: entry.slug },
+          props: {
+            entry: {
+              ...entry,
+              data: {
+                ...entry.data,
+                category: await getEntry(entry.data.category),
+              },
+            },
+          },
+        };
+      }),
+  );
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+console.log(entry);
 ---
 
 <Main title="lxnull">
   <Prose>
+    <h1>{entry.data.category.data.title}</h1>
     <Content />
   </Prose>
 </Main>

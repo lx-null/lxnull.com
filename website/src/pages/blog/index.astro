@@ -1,25 +1,40 @@
 ---
 import Main from "../../layouts/main.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 const postEntries = await getCollection("blog");
-const posts = postEntries.filter((entry) => {
-  return entry.data?.publishDate != undefined;
-});
+const posts = await Promise.all(
+  postEntries
+    .filter((entry) => {
+      return entry.data?.publishDate != undefined;
+    })
+    .map(async (entry) => {
+      return {
+        ...entry,
+        data: {
+          ...entry.data,
+          category: await getEntry(entry.data.category),
+        },
+      };
+    }),
+);
 ---
 
 <Main title="blog">
   <ul>
     {
       posts.map((entry) => {
+        console.log(entry);
         return (
           <li class="text-sm ">
             <a
               href={`/blog/${entry.slug}`}
-              class="focus:outline-none focus:bg-[#ffff00] focus:text-[#000000] hover:bg-[#ffff00] hover:text-[#000000]"
+              class="focus:outline-none focus:bg-[#ffff00] focus:text-[#000000] hover:bg-[#ffff00] hover:text-[#000000] group"
             >
-              {" "}
-              {`${entry.data.title} - ${new Date(String(entry.data.publishDate)).toLocaleDateString("en-GB")}`}
+              <div class="flex flex-col w-fit bg-inherit px-2 py-1">
+                <span class="w-fit text-lg">{entry.data.title} </span>
+                <span class="w-fit text-xs">{`► ${entry.data.category.data.title} - ${new Date(String(entry.data.publishDate)).toLocaleDateString("en-GB")}`}</span>
+              </div>
             </a>
           </li>
         );
