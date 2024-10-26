@@ -1,0 +1,38 @@
+---
+const path =
+  Astro.url.pathname.slice(-1) == "/"
+    ? Astro.url.pathname.slice(0, -1)
+    : Astro.url.pathname;
+
+const pathArray = path.split("/");
+console.log(path);
+console.log(pathArray);
+---
+
+<ol
+  itemscope
+  itemtype="https://schema.org/BreadcrumbList"
+  class="flex flex-row text-xs mb-2"
+>
+  {
+    pathArray.map((item, i) => {
+      return (
+        <li
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <a
+            itemprop="item"
+            href={`${item}/`}
+            class="hover:text-background hover:bg-foreground focus:text-background focus:bg-foreground focus:outline-none mx-1 "
+          >
+            <span itemprop="name">
+              {`${i == 0 ? "" : "►"} ${item == "" ? `${import.meta.env.SITE_URL}` : `${item}`}`}
+            </span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ol>
