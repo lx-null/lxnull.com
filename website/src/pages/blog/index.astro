@@ -26,7 +26,7 @@ const posts = await Promise.all(
     title: "lxnull - blog",
     description:
       "An index of all my personal and technical blog posts and guides.",
-    canonicalUrl: `${import.meta.env.SITE_URL}/blog`,
+    canonicalUrl: `${import.meta.env.SITE_URL}/blog/`,
   }}
 >
   <ul>
@@ -35,7 +35,7 @@ const posts = await Promise.all(
         return (
           <li class="text-sm ">
             <a
-              href={`/blog/${entry.slug}`}
+              href={`/blog/${entry.slug}/`}
               class="flex flex-col w-fit px-2 py-1 focus:outline-none focus:bg-foreground focus:text-background hover:bg-foreground hover:text-background "
             >
               <span class="w-fit text-lg">{entry.data.title} </span>
