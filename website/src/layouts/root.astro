@@ -1,0 +1,82 @@
+---
+import "@fontsource-variable/jetbrains-mono";
+
+const { meta } = Astro.props;
+
+const metaDefaults = {
+  title: "lxnull",
+  description:
+    "A tech website and blog for sharing casual projects and niche tutorials.",
+};
+---
+
+<html class="no-js bg-background text-foreground font-monospace" lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-5RNFQVHV");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{meta?.title || metaDefaults.title}</title>
+    <meta
+      name="description"
+      content={meta?.description || metaDefaults.description}
+    />
+
+    <meta property="og:title" content={meta?.title || metaDefaults.title} />
+    <meta property="og:type" content="website" />
+    {
+      meta?.canonicalUrl && (
+        <meta property="og:url" content={meta.canonicalUrl} />
+      )
+    }
+    <meta
+      property="og:description"
+      content={meta?.description || metaDefaults.description}
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicons/favicon-48x48.png"
+      sizes="48x48"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+
+    <meta name="theme-color" content="#000000" />
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5RNFQVHV"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+
+    <slot />
+  </body>
+</html>

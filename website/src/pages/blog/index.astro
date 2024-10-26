@@ -1,0 +1,49 @@
+---
+import Main from "../../layouts/main.astro";
+import { getCollection, getEntry } from "astro:content";
+
+const postEntries = await getCollection("blog");
+const posts = await Promise.all(
+  postEntries
+    .filter((entry) => {
+      return entry.data?.publishDate != undefined;
+    })
+    .map(async (entry) => {
+      return {
+        ...entry,
+        data: {
+          ...entry.data,
+          category: await getEntry(entry.data.category),
+        },
+      };
+    }),
+);
+---
+
+<Main
+  title="blog"
+  meta={{
+    title: "lxnull - blog",
+    description:
+      "An index of all my personal and technical blog posts and guides.",
+    canonicalUrl: `${import.meta.env.SITE_URL}/blog`,
+  }}
+>
+  <ul>
+    {
+      posts.map((entry) => {
+        return (
+          <li class="text-sm ">
+            <a
+              href={`/blog/${entry.slug}`}
+              class="flex flex-col w-fit px-2 py-1 focus:outline-none focus:bg-foreground focus:text-background hover:bg-foreground hover:text-background "
+            >
+              <span class="w-fit text-lg">{entry.data.title} </span>
+              <span class="w-fit text-xs">{`► ${entry.data.category.data.title} - ${new Date(String(entry.data.publishDate)).toLocaleDateString("en-GB")}`}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Main>

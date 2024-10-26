@@ -1,0 +1,45 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Main from "../../layouts/main.astro";
+import MDX from "../../components/mdx.astro";
+
+export async function getStaticPaths() {
+  const postEntries = await getCollection("blog");
+  return await Promise.all(
+    postEntries
+      .filter((entry) => {
+        return entry.data?.publishDate != undefined;
+      })
+      .map(async (entry) => {
+        return {
+          params: { slug: entry.slug },
+          props: {
+            entry: {
+              ...entry,
+              data: {
+                ...entry.data,
+                category: await getEntry(entry.data.category),
+              },
+            },
+          },
+        };
+      }),
+  );
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Main
+  title="lxnull"
+  meta={{
+    title: `lxnull - ${entry.data.title}`,
+    description: entry.data.metaDescription,
+    canonicalUrl: `${import.meta.env.SITE_URL}/blog/${entry.slug}`,
+  }}
+>
+  <MDX>
+    <Content />
+  </MDX>
+</Main>

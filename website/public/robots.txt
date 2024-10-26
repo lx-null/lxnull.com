@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lxnull.com/sitemap-index.xml

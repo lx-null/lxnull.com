@@ -1,0 +1,25 @@
+---
+import Navlink from "./navlink.astro";
+
+const { title } = Astro.props;
+---
+
+<div
+  class="flex flex-row w-[90vw] max-w-[700px] max-h-[39px] mx-auto mt-5 border-b-3 border-foreground after:content-[''] after:relative after:top-[-55px] after:right-[38px] after:bg-background after:w-[75px] after:h-[75px] after:rotate-45"
+>
+  <a
+    href="/"
+    class="h-fit bg-foreground text-background hover:bg-background hover:text-foreground focus:bg-background focus:text-foreground focus:outline-none"
+    ><h1 class="my-auto text-3xl font-bold text-center h-full m-0 pr-12 pl-2">
+      {title}
+    </h1>
+  </a>
+</div>
+
+<nav
+  class="px-4 hidden xs:block w-[90vw] max-w-[700px] border-foreground border-l-3 border-r-3 border-b-1 mx-auto"
+>
+  <ul class="flex flex-row py-2 gap-4">
+    <Navlink href="/blog">Blog</Navlink>
+  </ul>
+</nav>
