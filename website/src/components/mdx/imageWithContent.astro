@@ -1,15 +1,49 @@
 ---
 import { Image } from "astro:assets";
 
-const { src, alt, caption, side } = Astro.props;
+const { src, alt, caption, side, id } = Astro.props;
 ---
 
 <div class="mb-10">
   <figure
-    class={`mt-2 w-full sm:w-1/2 ${side == "right" ? "sm:float-right sm:ml-4" : "sm:float-left sm:mr-4"} float-top flex flex-col sm:block`}
+    class={`mt-2 w-full sm:w-1/2 ${side == "right" ? "sm:float-right sm:ml-4" : "sm:float-left sm:mr-4"} float-top flex flex-col`}
   >
-    <Image src={src} alt={alt} width="550" height="550" class="w-full" />
+    <button
+      class="flex flex-col group focus:outline-none"
+      onclick={`document.getElementById('${id}').showModal()`}
+    >
+      <Image src={src} alt={alt} width="550" height="550" class="w-full mb-0" />
+      <span
+        class="-mt-8 mx-auto group-focus:bg-foreground group-focus:text-background group-hover:bg-foreground group-hover:text-background px-1"
+        >Click to Enlarge</span
+      >
+    </button>
     <figcaption class="mt-2">{caption}</figcaption>
   </figure>
   <slot />
 </div>
+
+<dialog id={id} class="min-w-[100vw] min-h-[100vh] bg-background m-0">
+  <div
+    id={`${id}-img`}
+    class="m-10 h-fit border-foreground border-solid border-1 relative"
+  >
+    <form method="dialog" class="absolute m-0 top-4 left-4">
+      <button
+        class="focus:bg-foreground focus:text-background hover:bg-foreground hover:text-background px-1"
+        >Close</button
+      >
+    </form>
+    <Image src={src} alt={alt} width="2000" height="2000" class="w-full m-0" />
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ id }}>
+  document.getElementById(id).addEventListener("click", () => {
+    document.getElementById(id).close();
+  });
+
+  document.getElementById(`${id}-img`).addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+</script>
