@@ -6,9 +6,9 @@ const { src, alt, caption, side } = Astro.props;
 
 <div class="mb-10">
   <figure
-    class={`mt-2 w-1/2 ${side == "right" ? "float-right ml-4" : "float-left mr-4"} float-top`}
+    class={`mt-2 w-full sm:w-1/2 ${side == "right" ? "sm:float-right sm:ml-4" : "sm:float-left sm:mr-4"} float-top flex flex-col sm:block`}
   >
-    <Image src={src} alt={alt} width="300" height="100" />
+    <Image src={src} alt={alt} width="550" height="550" class="w-full" />
     <figcaption class="mt-2">{caption}</figcaption>
   </figure>
   <slot />
