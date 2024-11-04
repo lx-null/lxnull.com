@@ -1,0 +1,15 @@
+---
+import { Image } from "astro:assets";
+
+const { src, alt, caption, side } = Astro.props;
+---
+
+<div class="mb-10">
+  <figure
+    class={`mt-2 w-1/2 ${side == "right" ? "float-right ml-4" : "float-left mr-4"} float-top`}
+  >
+    <Image src={src} alt={alt} width="300" height="100" />
+    <figcaption class="mt-2">{caption}</figcaption>
+  </figure>
+  <slot />
+</div>

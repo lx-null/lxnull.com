@@ -10,6 +10,9 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://lxnull.com',
+  image: {
+    domains: ["cdn.lxnull.com"],
+  },
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
